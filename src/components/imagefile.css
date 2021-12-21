@@ -1,0 +1,61 @@
+.body {
+  display: flex;
+  flex: row;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container {
+  position: relative;
+
+  max-width: 80rem;
+  max-height: 80rem;
+  /* align-self: center;
+    justify-self: center; */
+}
+
+.hidden {
+  align-content: center;
+  justify-content: center;
+  width: 6rem;
+  height: 36rem;
+  padding: 1rem;
+  border-radius: 50px;
+  transition: ease-in 0.7s;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  object-fit: cover;
+}
+
+.active {
+  width: 12rem;
+  height: 36rem;
+  padding: 1rem;
+  border-radius: 50px;
+  transition: ease-in 0.7s;
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  object-fit: cover;
+}
+
+@media (max-width: 480px) {
+  .hidden {
+    object-fit: cover;
+    width: 3rem;
+    height: 50vh;
+    overflow: hidden;
+  }
+
+  .active {
+    object-fit: cover;
+    width: 18rem;
+    height: 50vh;
+    overflow: hidden;
+  }
+}
