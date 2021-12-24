@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 function App() {
   var someElement = document.querySelectorAll(".content-box");
-
+  console.log(someElement);
   let i = 0;
   let oldScrollY = 0;
 
@@ -12,9 +12,11 @@ function App() {
   const controlDirection = () => {
     if (window.scrollY > oldScrollY) {
       setDirection("down");
-      console.log("down");
     } else {
       setDirection("up");
+      if (someElement[i].getBoundingClientRect().top >= 0) {
+        console.log(i);
+      }
     }
     oldScrollY = window.scrollY;
   };
