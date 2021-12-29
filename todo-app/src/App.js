@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import ReactDOM from "react-dom";
 import { Button } from "antd";
+import { v4 as uuidv4 } from "uuid";
 import "antd/dist/antd.css";
 import "./App.css";
 
@@ -14,7 +15,8 @@ function App() {
   };
 
   const resetUserInput = () => {
-    setListItems([...listItems, val]);
+    const id = uuidv4();
+    setListItems([...listItems, { id: id, text: val }]);
     setVal("");
   };
 
@@ -36,9 +38,8 @@ function App() {
       </Button>
       <ul>
         {listItems.map((li, key) => (
-          <li key={li.id}>
-            {/* {...{ key }}> */}
-            {li}
+          <li {...{ key }}>
+            {li.text}
             <Button type="primary" onClick={() => deleteTodo(li.id)}>
               Delete
             </Button>
