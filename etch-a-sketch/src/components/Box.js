@@ -15,17 +15,30 @@ export default function Box(props) {
 
   const styleBoxes = {
     border: "1px solid black",
-    backgroundColor: `rgb(${randomColor()},${randomColor()},${randomColor()})`,
+    // backgroundColor: `rgb(${randomColor()},${randomColor()},${randomColor()})`,
   };
+
+  function handleMouseOver(event) {
+    const id = event.target.id;
+    console.log(id);
+  }
+
   let arrayBoxes = [];
   for (let i = 0; i < props.boxSize * props.boxSize; i++) {
     arrayBoxes.push(i);
   }
-  console.log(arrayBoxes);
+
   return (
     <div style={styles}>
       {arrayBoxes.map((el, l) => {
-        return <div style={styleBoxes} key={l}></div>;
+        return (
+          <div
+            style={styleBoxes}
+            id={l}
+            key={l}
+            onMouseOver={handleMouseOver}
+          ></div>
+        );
       })}
     </div>
   );
