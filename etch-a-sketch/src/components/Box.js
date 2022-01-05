@@ -3,6 +3,7 @@ import App from "../App";
 
 export default function Box(props) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [colorHover, setColorHover] = useState();
   //  index
 
   const styles = {
@@ -30,7 +31,7 @@ export default function Box(props) {
     console.log(props.boxSize);
     let arrayBoxes = [];
     for (let i = 0; i < props.boxSize * props.boxSize; i++) {
-      arrayBoxes.push({ hoverOver: false });
+      arrayBoxes.push({ hoverOver: false, color: undefined });
     }
     return arrayBoxes;
   }, [props.boxSize]);
