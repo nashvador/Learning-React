@@ -1,3 +1,4 @@
+import { hover } from "@testing-library/user-event/dist/hover";
 import React, { useState, useEffect, useMemo } from "react";
 import App from "../App";
 
@@ -37,13 +38,12 @@ export default function Box(props) {
     console.log(props.boxSize);
     let arrayBoxes = [];
     for (let i = 0; i < props.boxSize * props.boxSize; i++) {
-      arrayBoxes.push({ hoverOver: false, color: undefined });
+      arrayBoxes.push({ hoverOver: false });
     }
     return arrayBoxes;
   }, [props.boxSize]);
 
   // Have an object in the for loop with a colored property and then when you hover - set it to a rgb value,
-  console.log(arrayBoxes);
   return (
     <div style={styles}>
       {arrayBoxes.map((el, l) => {
@@ -51,10 +51,7 @@ export default function Box(props) {
           <div
             style={
               activeIndex === l
-                ? {
-                    border: "1px solid black",
-                    backgroundColor: `rgb(28,192,75)`,
-                  }
+                ? { border: "1px solid black", backgroundColor: "blue" }
                 : { border: "1px solid black" }
             }
             id={l}
