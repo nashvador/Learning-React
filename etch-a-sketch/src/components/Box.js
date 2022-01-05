@@ -30,7 +30,7 @@ export default function Box(props) {
     console.log(props.boxSize);
     let arrayBoxes = [];
     for (let i = 0; i < props.boxSize * props.boxSize; i++) {
-      arrayBoxes.push(i);
+      arrayBoxes.push({ hoverOver: false });
     }
     return arrayBoxes;
   }, [props.boxSize]);
