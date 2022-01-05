@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import App from "../App";
 
 export default function Box(props) {
-  const randomColor = () => Math.floor(Math.random() * 255);
+  const [activeIndex, setActiveIndex] = useState(0);
+  //  index
 
   const styles = {
     width: "560px",
@@ -18,25 +19,40 @@ export default function Box(props) {
     // backgroundColor: `rgb(${randomColor()},${randomColor()},${randomColor()})`,
   };
 
-  function handleMouseOver(event) {
-    const id = event.target.id;
-    console.log(id);
+  function handleMouseOver(id) {
+    // const id = Number(event.target.id);
+    setActiveIndex(id);
+    // console.log(activeIndex);
+    const randomColor = () => Math.floor(Math.random() * 255);
   }
 
-  let arrayBoxes = [];
-  for (let i = 0; i < props.boxSize * props.boxSize; i++) {
-    arrayBoxes.push(i);
-  }
+  let arrayBoxes = useMemo(() => {
+    console.log(props.boxSize);
+    let arrayBoxes = [];
+    for (let i = 0; i < props.boxSize * props.boxSize; i++) {
+      arrayBoxes.push(i);
+    }
+    return arrayBoxes;
+  }, [props.boxSize]);
+
+  // Have an object in the for loop with a colored property and then when you hover - set it to a rgb value,
 
   return (
     <div style={styles}>
       {arrayBoxes.map((el, l) => {
         return (
           <div
-            style={styleBoxes}
+            style={
+              activeIndex === l
+                ? {
+                    border: "1px solid black",
+                    backgroundColor: `rgb(28,192,75)`,
+                  }
+                : { border: "1px solid black" }
+            }
             id={l}
             key={l}
-            onMouseOver={handleMouseOver}
+            onMouseOver={() => handleMouseOver(l)}
           ></div>
         );
       })}
