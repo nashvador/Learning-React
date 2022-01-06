@@ -4,8 +4,6 @@ import App from "../App";
 
 export default function Box(props) {
   const [activeIndex, setActiveIndex] = useState(0);
-  // const [colorHover, setColorHover] = useState();
-  // console.log(arrayBoxes);
 
   const styles = {
     width: "560px",
@@ -18,7 +16,6 @@ export default function Box(props) {
 
   const styleBoxes = {
     border: "1px solid black",
-    // backgroundColor: `rgb(${randomColor()},${randomColor()},${randomColor()})`,
   };
 
   let arrayBoxes = useMemo(() => {
@@ -32,16 +29,8 @@ export default function Box(props) {
 
   let handleMouseOver = useCallback(
     (id) => {
-      // const id = Number(event.target.id);
       setActiveIndex(id);
-      // console.log(activeIndex);
 
-      // setColorHover(arrayBoxes);
-      // let temp_state = [...colorHover];
-      // let temp_element = { ...temp_state[id] };
-      // temp_element.hoverOver = temp_element.hoverOver + true;
-      // temp_state[id] = temp_element;
-      // setColorHover(temp_state);
       arrayBoxes[id].hoverOver = true;
       const randomColor = () => Math.floor(Math.random() * 255);
       arrayBoxes[
@@ -51,7 +40,6 @@ export default function Box(props) {
     [arrayBoxes]
   );
 
-  // Have an object in the for loop with a colored property and then when you hover - set it to a rgb value,
   return (
     <div style={styles}>
       {arrayBoxes.map((el, l) => {

@@ -14,3 +14,18 @@ body {
   overflow: hidden;
   margin: 0;
 }
+
+.button-outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: #ff3737;
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px;
+}

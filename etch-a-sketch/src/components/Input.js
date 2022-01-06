@@ -10,8 +10,10 @@ export default function Input(props) {
   };
 
   return (
-    <div>
-      <button onClick={onClickButton}>Enter Size</button>
+    <div className="button-outer">
+      <button className="button" onClick={onClickButton}>
+        Enter Size
+      </button>
     </div>
   );
 }
