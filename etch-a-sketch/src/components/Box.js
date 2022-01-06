@@ -22,7 +22,7 @@ export default function Box(props) {
     console.log(props.boxSize);
     let arrayBoxes = [];
     for (let i = 0; i < props.boxSize * props.boxSize; i++) {
-      arrayBoxes.push({ hoverOver: false, rgbValue: `rgb(255,255,255)` });
+      arrayBoxes.push({ hoverOver: false, rgbValue: `rgba(255,255,255)` });
     }
     return arrayBoxes;
   }, [props.boxSize]);
@@ -33,9 +33,10 @@ export default function Box(props) {
 
       arrayBoxes[id].hoverOver = true;
       const randomColor = () => Math.floor(Math.random() * 255);
+
       arrayBoxes[
         id
-      ].rgbValue = `rgb(${randomColor()},${randomColor()},${randomColor()})`;
+      ].rgbValue = `rgba(${randomColor()},${randomColor()},${randomColor()})`;
     },
     [arrayBoxes]
   );
