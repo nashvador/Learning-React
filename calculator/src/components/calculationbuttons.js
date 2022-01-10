@@ -1,4 +1,6 @@
-export default function Buttons() {
+import React, { useState } from "react";
+
+export default function Buttons(props) {
   const styles = {
     display: "grid",
     width: "480px",
@@ -8,12 +10,20 @@ export default function Buttons() {
     backgroundColor: "blue",
     padding: "10px",
   };
+
+  const getButtonValues = (getButtonValue) => {
+    props.setButtonValue(getButtonValue.currentTarget.value);
+    console.log(props.buttonValue);
+  };
+
   return (
     <div className="calculator-grid" style={styles}>
       <button style={{ gridColumn: "1/3" }}>C</button>
       <button>Backspace</button>
       <button>=</button>
-      <button>7</button>
+      <button value={7} onClick={getButtonValues}>
+        7
+      </button>
       <button>8</button>
       <button>9</button>
       <button>+</button>
