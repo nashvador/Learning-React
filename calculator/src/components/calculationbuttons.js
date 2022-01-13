@@ -12,7 +12,10 @@ export default function Buttons(props) {
   };
 
   const getButtonValues = (getButtonValue) => {
-    props.setButtonValue(getButtonValue.currentTarget.value);
+    props.setButtonValue((prevValue) => [
+      prevValue + getButtonValue.currentTarget.value,
+    ]);
+    console.log(getButtonValue.currentTarget.value);
     console.log(props.buttonValue);
   };
 
@@ -21,7 +24,7 @@ export default function Buttons(props) {
       <button style={{ gridColumn: "1/3" }}>C</button>
       <button>Backspace</button>
       <button>=</button>
-      <button value={7} onClick={getButtonValues}>
+      <button value="7" onClick={getButtonValues}>
         7
       </button>
       <button>8</button>

@@ -4,7 +4,7 @@ import Input from "./components/input";
 import React, { useState } from "react";
 
 function App() {
-  const [buttonValue, setButtonValue] = useState(0);
+  const [buttonValue, setButtonValue] = useState([]);
   return (
     <div>
       <Input />
