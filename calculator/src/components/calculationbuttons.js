@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 
 export default function Buttons(props) {
   const styles = {
@@ -11,12 +11,16 @@ export default function Buttons(props) {
     padding: "10px",
   };
   let myCalculatorValue = "";
-  const getButtonValues = (getButtonValue) => {
-    myCalculatorValue += getButtonValue.currentTarget.value;
-    console.log(myCalculatorValue);
-    props.setButtonValue(myCalculatorValue);
-    // console.log(props.buttonValue);
-  };
+
+  const getButtonValues = useMemo(
+    () =>
+      function (getButtonValue) {
+        myCalculatorValue += getButtonValue.currentTarget.value;
+        console.log(myCalculatorValue);
+        props.setButtonValue(myCalculatorValue);
+      },
+    [myCalculatorValue]
+  );
 
   return (
     <div className="calculator-grid" style={styles}>
@@ -26,18 +30,36 @@ export default function Buttons(props) {
       <button value="7" onClick={getButtonValues}>
         7
       </button>
-      <button>8</button>
-      <button>9</button>
+      <button value="8" onClick={getButtonValues}>
+        8
+      </button>
+      <button value="9" onClick={getButtonValues}>
+        9
+      </button>
       <button>+</button>
-      <button>4</button>
-      <button>5</button>
-      <button>6</button>
+      <button value="4" onClick={getButtonValues}>
+        4
+      </button>
+      <button value="5" onClick={getButtonValues}>
+        5
+      </button>
+      <button value="6" onClick={getButtonValues}>
+        6
+      </button>
       <button>-</button>
-      <button>1</button>
-      <button>2</button>
-      <button>3</button>
+      <button value="1" onClick={getButtonValues}>
+        1
+      </button>
+      <button value="2" onClick={getButtonValues}>
+        2
+      </button>
+      <button value="3" onClick={getButtonValues}>
+        3
+      </button>
       <button>X</button>
-      <button style={{ gridColumn: "1/3" }}>0</button>
+      <button value="0" onClick={getButtonValues} style={{ gridColumn: "1/3" }}>
+        0
+      </button>
       <button>.</button>
       <button>
         <span>&#247;</span>
