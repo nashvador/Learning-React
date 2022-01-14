@@ -16,12 +16,28 @@ export default function Buttons(props) {
     () =>
       function (getButtonValue) {
         myCalculatorValue += getButtonValue.currentTarget.value;
-        console.log(myCalculatorValue);
         props.setButtonValue(myCalculatorValue);
       },
     [myCalculatorValue]
   );
 
+  const getOperationValues = () => {
+    if (props.operationValue.operation1 === null) {
+      props.setOperationValue((PrevOpValue) => ({
+        ...PrevOpValue,
+        operation1: props.buttonValue,
+      }));
+      props.setButtonValue();
+    } else {
+      props.setButtonValue();
+      props.setOperationValue((PrevOpValue) => ({
+        ...PrevOpValue,
+        operation2: props.buttonValue,
+      }));
+    }
+  };
+
+  console.log(props.operationValue);
   return (
     <div className="calculator-grid" style={styles}>
       <button style={{ gridColumn: "1/3" }}>C</button>
@@ -36,7 +52,7 @@ export default function Buttons(props) {
       <button value="9" onClick={getButtonValues}>
         9
       </button>
-      <button>+</button>
+      <button onClick={getOperationValues}>+</button>
       <button value="4" onClick={getButtonValues}>
         4
       </button>
