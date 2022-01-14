@@ -1,4 +1,4 @@
-export default function Input() {
+export default function Input(props) {
   const styles = {
     backgroundColor: "black",
     width: "360px",
@@ -6,7 +6,7 @@ export default function Input() {
   };
   return (
     <div>
-      <h1>hi</h1>
+      <h1>{props.buttonValue}</h1>
     </div>
   );
 }

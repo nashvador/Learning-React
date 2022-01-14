@@ -4,10 +4,10 @@ import Input from "./components/input";
 import React, { useState } from "react";
 
 function App() {
-  const [buttonValue, setButtonValue] = useState([]);
+  const [buttonValue, setButtonValue] = useState();
   return (
     <div>
-      <Input />
+      <Input setButtonValue={setButtonValue} buttonValue={buttonValue} />
       <Buttons setButtonValue={setButtonValue} buttonValue={buttonValue} />
     </div>
   );

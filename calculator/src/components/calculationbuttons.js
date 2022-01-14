@@ -10,13 +10,12 @@ export default function Buttons(props) {
     backgroundColor: "blue",
     padding: "10px",
   };
-
+  let myCalculatorValue = "";
   const getButtonValues = (getButtonValue) => {
-    props.setButtonValue((prevValue) => [
-      prevValue + getButtonValue.currentTarget.value,
-    ]);
-    console.log(getButtonValue.currentTarget.value);
-    console.log(props.buttonValue);
+    myCalculatorValue += getButtonValue.currentTarget.value;
+    console.log(myCalculatorValue);
+    props.setButtonValue(myCalculatorValue);
+    // console.log(props.buttonValue);
   };
 
   return (
