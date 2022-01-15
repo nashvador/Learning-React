@@ -12,6 +12,8 @@ export default function Buttons(props) {
   };
   let myCalculatorValue = "";
 
+  // You can potentially use reduce for your functions
+
   const getButtonValues = useMemo(
     () =>
       function (getButtonValue) {
