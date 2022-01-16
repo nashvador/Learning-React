@@ -14,15 +14,14 @@ export default function Buttons(props) {
 
   // You can potentially use reduce for your functions
 
-  const getButtonValues = useMemo(
-    () =>
-      function (getButtonValue) {
-        myCalculatorValue += getButtonValue.currentTarget.value;
-        props.setButtonValue(myCalculatorValue);
-        console.log(myCalculatorValue);
-      },
-    [myCalculatorValue]
-  );
+  const getButtonValues = (getButtonValue) => {
+    console.log(getButtonValue);
+
+    props.setButtonValue(
+      (prevValue) => prevValue + getButtonValue?.target?.value
+    );
+    console.log(myCalculatorValue);
+  };
 
   const getOperationValues = () => {
     if (props.operationValue.operation1 === null) {
@@ -30,15 +29,16 @@ export default function Buttons(props) {
         ...PrevOpValue,
         operation1: props.buttonValue,
       }));
-      props.setButtonValue();
+      props.setButtonValue("");
     } else {
-      props.setButtonValue();
+      props.setButtonValue("");
       props.setOperationValue((PrevOpValue) => ({
         ...PrevOpValue,
         operation2: props.buttonValue,
       }));
     }
   };
+  console.log(props.operationValue);
 
   // console.log(props.operationValue);
   return (
