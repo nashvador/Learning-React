@@ -11,7 +11,17 @@ const App = () => {
   const clickFunction = (event) => {
     event.preventDefault();
 
-    setPersons((prevPersons) => [...prevPersons, { name: newName }]);
+    let result = persons.find((obj) => {
+      if (obj.name === newName) {
+        return true;
+      }
+    });
+
+    if (result) {
+      alert(`${newName} is already in the box`);
+    } else {
+      setPersons((prevPersons) => [...prevPersons, { name: newName }]);
+    }
   };
 
   return (
