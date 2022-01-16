@@ -6,6 +6,7 @@ const App = () => {
   ]);
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
+  const [newSearch, setNewSearch] = useState("");
 
   const handleChangeValue = (event) => {
     setNewName(event.target.value);
@@ -13,6 +14,10 @@ const App = () => {
 
   const handlePhoneValue = (event) => {
     setNewPhone(event.target.value);
+  };
+
+  const handleSearchValue = (event) => {
+    setNewSearch(event.target.value);
   };
 
   const clickFunction = (event) => {
@@ -34,9 +39,17 @@ const App = () => {
     }
   };
 
+  const searchBar = persons
+    .filter((eachPerson) => eachPerson.name.includes(newSearch))
+    .map((elem, i) => <p key={i}> {elem.name}</p>);
+
   return (
     <div>
       <h2>Phonebook</h2>
+      <div>
+        filter shown with <input onChange={handleSearchValue}></input>
+        {searchBar}
+      </div>
       <form>
         <div>
           name: <input onChange={handleChangeValue} />
