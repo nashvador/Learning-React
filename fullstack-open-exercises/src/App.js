@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 
 const App = () => {
-  const [persons, setPersons] = useState([{ name: "Arto Hellas" }]);
+  const [persons, setPersons] = useState([
+    { name: "Arto Hellas", number: "040-123456" },
+  ]);
   const [newName, setNewName] = useState("");
+  const [newPhone, setNewPhone] = useState("");
 
   const handleChangeValue = (event) => {
     setNewName(event.target.value);
+  };
+
+  const handlePhoneValue = (event) => {
+    setNewPhone(event.target.value);
   };
 
   const clickFunction = (event) => {
@@ -20,7 +27,10 @@ const App = () => {
     if (result) {
       alert(`${newName} is already in the box`);
     } else {
-      setPersons((prevPersons) => [...prevPersons, { name: newName }]);
+      setPersons((prevPersons) => [
+        ...prevPersons,
+        { name: newName, number: newPhone },
+      ]);
     }
   };
 
@@ -32,6 +42,9 @@ const App = () => {
           name: <input onChange={handleChangeValue} />
         </div>
         <div>
+          number: <input onChange={handlePhoneValue} />
+        </div>
+        <div>
           <button onClick={clickFunction} type="submit">
             add
           </button>
@@ -39,7 +52,9 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       {persons.map((names, i) => (
-        <p key={i}>{names.name}</p>
+        <p key={i}>
+          {names.name}, {names.number}
+        </p>
       ))}
     </div>
   );
