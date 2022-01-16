@@ -19,6 +19,7 @@ export default function Buttons(props) {
       function (getButtonValue) {
         myCalculatorValue += getButtonValue.currentTarget.value;
         props.setButtonValue(myCalculatorValue);
+        console.log(myCalculatorValue);
       },
     [myCalculatorValue]
   );
@@ -39,7 +40,7 @@ export default function Buttons(props) {
     }
   };
 
-  console.log(props.operationValue);
+  // console.log(props.operationValue);
   return (
     <div className="calculator-grid" style={styles}>
       <button style={{ gridColumn: "1/3" }}>C</button>
