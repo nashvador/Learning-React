@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 
 export default function Buttons(props) {
   const styles = {
@@ -24,6 +24,7 @@ export default function Buttons(props) {
       props.setOperationValue((PrevOpValue) => ({
         ...PrevOpValue,
         operation1: props.buttonValue,
+        operator: "plus",
       }));
       props.setButtonValue("");
     } else {
@@ -41,9 +42,10 @@ export default function Buttons(props) {
     props.setOperationValue((PrevOpValue) => ({
       ...PrevOpValue,
       operation2: props.buttonValue,
-      operator: "plus",
     }));
+  };
 
+  useEffect(() => {
     if (Object.values(props.operationValue).includes("plus")) {
       let a = parseInt(props.operationValue.operation1, 10);
       let b = parseInt(props.operationValue.operation2, 10);
@@ -55,7 +57,7 @@ export default function Buttons(props) {
       }));
       console.log(props.operationValue.output);
     }
-  };
+  }, [props.operationValue.operation2]);
 
   return (
     <div className="calculator-grid" style={styles}>
