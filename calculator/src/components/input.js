@@ -6,7 +6,11 @@ export default function Input(props) {
   };
   return (
     <div>
-      <h1>{props.buttonValue}</h1>
+      <h1>
+        {props.operationValue.output === null
+          ? props.buttonValue
+          : props.operationValue.ouput}
+      </h1>
     </div>
   );
 }

@@ -8,8 +8,10 @@ function App() {
   const [operationValue, setOperationValue] = useState({
     operation1: null,
     operation2: "",
-    output: "",
+    operator: "",
+    output: false,
   });
+
   return (
     <div>
       <Input setButtonValue={setButtonValue} buttonValue={buttonValue} />

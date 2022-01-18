@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 const App = () => {
   const [persons, setPersons] = useState([
     { name: "Arto Hellas", number: "040-123456" },
   ]);
+
+  async function fetchData() {
+    try {
+      let response = await axios.get(`http://localhost:3001/persons`);
+      console.log(response);
+      setPersons(response.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   const [newName, setNewName] = useState("");
   const [newPhone, setNewPhone] = useState("");
   const [newSearch, setNewSearch] = useState("");

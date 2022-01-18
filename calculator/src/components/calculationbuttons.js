@@ -10,17 +10,13 @@ export default function Buttons(props) {
     backgroundColor: "blue",
     padding: "10px",
   };
-  let myCalculatorValue = "";
 
   // You can potentially use reduce for your functions
 
   const getButtonValues = (getButtonValue) => {
-    console.log(getButtonValue);
-
     props.setButtonValue(
       (prevValue) => prevValue + getButtonValue?.target?.value
     );
-    console.log(myCalculatorValue);
   };
 
   const getOperationValues = () => {
@@ -28,6 +24,7 @@ export default function Buttons(props) {
       props.setOperationValue((PrevOpValue) => ({
         ...PrevOpValue,
         operation1: props.buttonValue,
+        operator: "plus",
       }));
       props.setButtonValue("");
     } else {
@@ -38,14 +35,32 @@ export default function Buttons(props) {
       }));
     }
   };
+
+  // when trying to make the function for each you can use ${} to set the operator to change
+
+  const onEqualButtonPress = () => {
+    props.setOperationValue((PrevOpValue) => ({
+      ...PrevOpValue,
+      operation2: props.buttonValue,
+    }));
+
+    if (Object.values(props.operationValue).includes("plus")) {
+      let a = parseInt(props.operationValue.operation1, 10);
+      let b = parseInt(props.operationValue.operation2, 10);
+      props.setOperationValue((prevOpValues) => ({
+        ...prevOpValues,
+        output: a * b,
+      }));
+      console.log(props.operationValue);
+    }
+  };
   console.log(props.operationValue);
 
-  // console.log(props.operationValue);
   return (
     <div className="calculator-grid" style={styles}>
       <button style={{ gridColumn: "1/3" }}>C</button>
       <button>Backspace</button>
-      <button>=</button>
+      <button onClick={onEqualButtonPress}>=</button>
       <button value="7" onClick={getButtonValues}>
         7
       </button>
