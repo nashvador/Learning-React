@@ -24,7 +24,6 @@ export default function Buttons(props) {
       props.setOperationValue((PrevOpValue) => ({
         ...PrevOpValue,
         operation1: props.buttonValue,
-        operator: "plus",
       }));
       props.setButtonValue("");
     } else {
@@ -42,19 +41,21 @@ export default function Buttons(props) {
     props.setOperationValue((PrevOpValue) => ({
       ...PrevOpValue,
       operation2: props.buttonValue,
+      operator: "plus",
     }));
 
     if (Object.values(props.operationValue).includes("plus")) {
       let a = parseInt(props.operationValue.operation1, 10);
       let b = parseInt(props.operationValue.operation2, 10);
-      props.setOperationValue((prevOpValues) => ({
-        ...prevOpValues,
-        output: a * b,
+      let c = String(a + b);
+      console.log(a + b);
+      props.setOperationValue((PrevOpValue) => ({
+        ...PrevOpValue,
+        output: c,
       }));
-      console.log(props.operationValue);
+      console.log(props.operationValue.output);
     }
   };
-  console.log(props.operationValue);
 
   return (
     <div className="calculator-grid" style={styles}>

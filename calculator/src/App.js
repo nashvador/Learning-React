@@ -11,15 +11,25 @@ function App() {
     operator: "",
     output: false,
   });
+  const [outputValue, setOutputValue] = useState();
 
   return (
     <div>
-      <Input setButtonValue={setButtonValue} buttonValue={buttonValue} />
+      <Input
+        setButtonValue={setButtonValue}
+        buttonValue={buttonValue}
+        setOperationValue={setOperationValue}
+        operationValue={operationValue}
+        outputValue={outputValue}
+        setOutputValue={setOutputValue}
+      />
       <Buttons
         setButtonValue={setButtonValue}
         buttonValue={buttonValue}
         setOperationValue={setOperationValue}
         operationValue={operationValue}
+        outputValue={outputValue}
+        setOutputValue={setOutputValue}
       />
     </div>
   );
