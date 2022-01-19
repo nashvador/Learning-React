@@ -13,6 +13,8 @@ export default function Buttons(props) {
 
   // You can potentially use reduce for your functions
 
+  console.log(parseFloat(props.buttonValue));
+
   const getButtonValues = (getButtonValue) => {
     props.setButtonValue(
       (prevValue) => prevValue + getButtonValue?.target?.value
@@ -97,7 +99,7 @@ export default function Buttons(props) {
       <button value="0" onClick={getButtonValues} style={{ gridColumn: "1/3" }}>
         0
       </button>
-      <button>.</button>
+      <button value=".">.</button>
       <button>
         <span>&#247;</span>
       </button>

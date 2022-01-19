@@ -25,7 +25,7 @@ function App() {
         countries.name.common.toLowerCase().includes(searchData.toLowerCase())
       )
     );
-  }, [countryData, searchData]);
+  }, [searchData]);
 
   console.log(countryData);
   console.log(filteredCountries);
@@ -34,10 +34,46 @@ function App() {
     setSearchData(event.target.value);
   };
 
+  const DisplayCountryData = () => {
+    if (filteredCountries.length > 10) {
+      return <div> Narrow your search to less than 10 countries </div>;
+    } else if (filteredCountries.length === 1) {
+      return (
+        <div>
+          <h1>{filteredCountries[0].name.common}</h1>
+          <p>capital {filteredCountries[0].capital}</p>
+          <p>population {filteredCountries[0].population}</p>
+          <ul>
+            {Object.values(filteredCountries[0].languages).map(
+              (language, index) => (
+                <li key={index}>{language}</li>
+              )
+            )}
+          </ul>
+          <img src={filteredCountries[0].flags.png}></img>
+          {console.log(filteredCountries[0].flags)}
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <ul>
+            {filteredCountries.map((country, index) => (
+              <li key={index}>
+                {country.name.common}
+                <button>Show</button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      );
+    }
+  };
+
   return (
     <div>
       find countries : <input onChange={onChangeHandler}></input>
-      <ul>
+      {/* <ul>
         {filteredCountries.length > 10 ? (
           <div>Narrow your search there are more than 10</div>
         ) : (
@@ -45,7 +81,8 @@ function App() {
             <li key={i}>{country.name.common}</li>
           ))
         )}
-      </ul>
+      </ul> */}
+      <DisplayCountryData />{" "}
     </div>
   );
 }
