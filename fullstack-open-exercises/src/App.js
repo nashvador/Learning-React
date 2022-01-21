@@ -55,6 +55,16 @@ const App = () => {
     }
   };
 
+  useEffect(() => {
+    const newNote = {
+      name: newName,
+      number: newPhone,
+    };
+    axios.post("http://localhost:3001/persons", newNote).then((response) => {
+      setPersons(persons.concat(response.data));
+    });
+  }, [newName]);
+
   const searchBar = persons
     .filter((eachPerson) => eachPerson.name.includes(newSearch))
     .map((elem, i) => <p key={i}> {elem.name}</p>);

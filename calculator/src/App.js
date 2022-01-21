@@ -12,6 +12,7 @@ function App() {
     output: false,
   });
   const [outputValue, setOutputValue] = useState();
+  const [operator, setOperator] = useState();
 
   return (
     <div>
@@ -22,6 +23,8 @@ function App() {
         operationValue={operationValue}
         outputValue={outputValue}
         setOutputValue={setOutputValue}
+        operator={operator}
+        setOperator={setOperator}
       />
       <Buttons
         setButtonValue={setButtonValue}
@@ -30,6 +33,8 @@ function App() {
         operationValue={operationValue}
         outputValue={outputValue}
         setOutputValue={setOutputValue}
+        operator={operator}
+        setOperator={setOperator}
       />
     </div>
   );
