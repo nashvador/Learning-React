@@ -46,6 +46,8 @@ export default function Buttons(props) {
     }));
   };
 
+  const convertToDecimal = () => {};
+
   useEffect(() => {
     if (Object.values(props.operationValue).includes("plus")) {
       let a = parseInt(props.operationValue.operation1, 10);
