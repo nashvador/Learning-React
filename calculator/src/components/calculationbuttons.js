@@ -17,6 +17,14 @@ export default function Buttons(props) {
     props.setButtonValue(
       (prevValue) => prevValue + getButtonValue?.target?.value
     );
+    console.log(props.buttonValue);
+  };
+
+  const deleteOperator = () => {
+    const backspaceEdit = props.buttonValue;
+    let editedValues = backspaceEdit.toString().slice(0, -1);
+    console.log(editedValues);
+    props.setButtonValue(editedValues);
   };
 
   const getOperationValues = (buttonValue) => {
@@ -45,8 +53,6 @@ export default function Buttons(props) {
       operation2: props.buttonValue,
     }));
   };
-
-  const convertToDecimal = () => {};
 
   useEffect(() => {
     if (Object.values(props.operationValue).includes("plus")) {
@@ -95,7 +101,7 @@ export default function Buttons(props) {
   return (
     <div className="calculator-grid" style={styles}>
       <button style={{ gridColumn: "1/3" }}>C</button>
-      <button>Backspace</button>
+      <button onClick={deleteOperator}>Backspace</button>
       <button onClick={onEqualButtonPress}>=</button>
       <button value="7" onClick={getButtonValues}>
         7
