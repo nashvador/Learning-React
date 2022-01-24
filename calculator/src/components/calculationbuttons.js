@@ -50,8 +50,8 @@ export default function Buttons(props) {
 
   useEffect(() => {
     if (Object.values(props.operationValue).includes("plus")) {
-      let a = parseInt(props.operationValue.operation1, 10);
-      let b = parseInt(props.operationValue.operation2, 10);
+      let a = parseFloat(props.operationValue.operation1, 10);
+      let b = parseFloat(props.operationValue.operation2, 10);
       let c = String(a + b);
       console.log(a + b);
       props.setOperationValue((PrevOpValue) => ({
@@ -60,8 +60,8 @@ export default function Buttons(props) {
       }));
       console.log(props.operationValue.output);
     } else if (Object.values(props.operationValue).includes("minus")) {
-      let a = parseInt(props.operationValue.operation1, 10);
-      let b = parseInt(props.operationValue.operation2, 10);
+      let a = parseFloat(props.operationValue.operation1, 10);
+      let b = parseFloat(props.operationValue.operation2, 10);
       let c = String(a - b);
       console.log(a + b);
       props.setOperationValue((PrevOpValue) => ({
@@ -70,8 +70,8 @@ export default function Buttons(props) {
       }));
       console.log(props.operationValue.output);
     } else if (Object.values(props.operationValue).includes("multiply")) {
-      let a = parseInt(props.operationValue.operation1, 10);
-      let b = parseInt(props.operationValue.operation2, 10);
+      let a = parseFloat(props.operationValue.operation1, 10);
+      let b = parseFloat(props.operationValue.operation2, 10);
       let c = String(a * b);
       console.log(a + b);
       props.setOperationValue((PrevOpValue) => ({
@@ -80,8 +80,8 @@ export default function Buttons(props) {
       }));
       console.log(props.operationValue.output);
     } else if (Object.values(props.operationValue).includes("divide")) {
-      let a = parseInt(props.operationValue.operation1, 10);
-      let b = parseInt(props.operationValue.operation2, 10);
+      let a = parseFloat(props.operationValue.operation1, 10);
+      let b = parseFloat(props.operationValue.operation2, 10);
       let c = String(a / b);
       console.log(a + b);
       props.setOperationValue((PrevOpValue) => ({
@@ -136,7 +136,9 @@ export default function Buttons(props) {
       <button value="0" onClick={getButtonValues} style={{ gridColumn: "1/3" }}>
         0
       </button>
-      <button value=".">.</button>
+      <button value="." onClick={getButtonValues}>
+        .
+      </button>
       <button value="divide" onClick={getOperationValues}>
         <span>&#247;</span>
       </button>
