@@ -27,6 +27,16 @@ export default function Buttons(props) {
     props.setButtonValue(editedValues);
   };
 
+  const resetAllValues = () => {
+    props.setButtonValue("");
+    props.setOperationValue({
+      operation1: null,
+      operation2: "",
+      operator: "",
+      output: false,
+    });
+  };
+
   const getOperationValues = (buttonValue) => {
     if (props.operationValue.operation1 === null) {
       props.setOperationValue((PrevOpValue) => ({
@@ -100,7 +110,9 @@ export default function Buttons(props) {
 
   return (
     <div className="calculator-grid" style={styles}>
-      <button style={{ gridColumn: "1/3" }}>C</button>
+      <button style={{ gridColumn: "1/3" }} onClick={resetAllValues}>
+        C
+      </button>
       <button onClick={deleteOperator}>Backspace</button>
       <button onClick={onEqualButtonPress}>=</button>
       <button value="7" onClick={getButtonValues}>
