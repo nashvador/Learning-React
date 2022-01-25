@@ -1,3 +1,8 @@
+#How I worked on this project
+
+#If I had more time, I would change the following:
+-currently the project itself does not have a selection feature, I would add something where you can select the gradient.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
