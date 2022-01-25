@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Buttons(props) {
   const styles = {
@@ -11,19 +11,15 @@ export default function Buttons(props) {
     padding: "10px",
   };
 
-  // You can potentially use reduce for your functions
-
   const getButtonValues = (getButtonValue) => {
     props.setButtonValue(
       (prevValue) => prevValue + getButtonValue?.target?.value
     );
-    console.log(props.buttonValue);
   };
 
   const deleteOperator = () => {
     const backspaceEdit = props.buttonValue;
     let editedValues = backspaceEdit.toString().slice(0, -1);
-    console.log(editedValues);
     props.setButtonValue(editedValues);
   };
 
@@ -55,8 +51,6 @@ export default function Buttons(props) {
     }
   };
 
-  // when trying to make the function for each you can use ${} to set the operator to change
-
   const onEqualButtonPress = () => {
     props.setOperationValue((PrevOpValue) => ({
       ...PrevOpValue,
@@ -72,8 +66,10 @@ export default function Buttons(props) {
       console.log(a + b);
       props.setOperationValue((PrevOpValue) => ({
         ...PrevOpValue,
+        operation1: c,
         output: c,
       }));
+
       console.log(props.operationValue.output);
     } else if (Object.values(props.operationValue).includes("minus")) {
       let a = parseFloat(props.operationValue.operation1, 10);
