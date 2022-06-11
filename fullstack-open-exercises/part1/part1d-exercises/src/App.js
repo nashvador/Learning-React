@@ -19,18 +19,17 @@ const App = () => {
   let max = Math.max(...values)
   let index = values.indexOf(max)
 
-  console.log(index)
 
   const voteFunction = () => {
-    copy[selected] += 1
-    setVotes(copy)
+    setVotes((prevVotes)=> ({...prevVotes, [selected]: prevVotes[selected] + 1}))
+    console.log(vote)
   }
-   const clickFunction = () => {
-   let value = Math.floor(Math.random() * 7)
-   setSelected(value)
-   } 
+  
+  const clickFunction = () => {
+  let value = Math.floor(Math.random() * 7)
+  setSelected(value)
+  } 
 
-   console.log(vote)
 
   return (
     <div>
