@@ -26,12 +26,17 @@ const handleSearchChange = (event) => {
 }
 
 const onClick = () => {
-let phoneBool = false
+let phoneBool = false 
 persons.find(person => person.name == newName ? phoneBool = true : phoneBool = false)
 if (phoneBool) {
   window.alert(`${newName} is already in the phonebook`)
-} else setPersons((prevPersons) => ([...prevPersons, {name: `${newName}`, number: `${newNumber}`}])) 
-}
+} else {
+let newPerson = {name: newName, number: newNumber} 
+// setPersons((prevPersons) => ([...prevPersons, {name: `${newName}`, number: `${newNumber}`}])) Previous for setting state
+axios.post('http://localhost:3001/persons', newPerson).then(response => {console.log(response.data);
+setPersons((previousPersons) => [...previousPersons, response.data])}) 
+console.log(persons)
+}}
 
 const preventReset = (event) => {
   event.preventDefault()
