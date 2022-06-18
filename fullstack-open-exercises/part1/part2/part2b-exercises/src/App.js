@@ -33,10 +33,28 @@ if (phoneBool) {
 } else {
 let newPerson = {name: newName, number: newNumber} 
 // setPersons((prevPersons) => ([...prevPersons, {name: `${newName}`, number: `${newNumber}`}])) Previous for setting state
-axios.post('http://localhost:3001/persons', newPerson).then(response => {console.log(response.data);
+axios.post(`http://localhost:3001/persons`, newPerson).then(response => {console.log(response.data);
 setPersons((previousPersons) => [...previousPersons, response.data])}) 
 console.log(persons)
 }}
+
+// Delete without updating the state
+// const deleteItem = (index) => {
+//   setPersons((prevState) => {
+//     let items = [...prevState];
+//     console.log(items);
+//     items.splice(index, 1);
+//     return items;
+//   });
+// }
+
+const deleteItem = (index) => {
+  axios.delete(`http://localhost:3001/persons/${index+1}`).then(response => {
+    console.log(response.data)
+    setPersons((previousPersons) => [...previousPersons, response.data])
+console.log(persons)
+  })
+}
 
 const preventReset = (event) => {
   event.preventDefault()
@@ -59,7 +77,7 @@ const preventReset = (event) => {
         
       </form>
       <h2>Numbers</h2>
-      {persons.map((personElements)=><p>{personElements.name}, {personElements.number}</p>)}
+      {persons.map((personElements, id)=><p>{personElements.name}, {personElements.number}<button onClick={() => deleteItem(id)}>delete</button></p>)}
     </div>
   )
 }
