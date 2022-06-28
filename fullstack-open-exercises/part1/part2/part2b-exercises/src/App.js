@@ -28,13 +28,20 @@ const handleSearchChange = (event) => {
 const onClick = () => {
 let phoneBool = false
 let inBook = false
-persons.find(person => person.name == newName ? phoneBool = true : phoneBool = false)
+let personId = null
+persons.find((person) => {
+  if (person.name == newName) {
+    phoneBool = true;
+    personId = person.id
+  } else phoneBool = false})
 if (phoneBool) {
   persons.find(person => person.number == newNumber ? inBook = true : inBook = false)
   if (inBook) {
     window.alert(`${newName} is already in the phonebook`)
   } else {
-
+    if (Window.confirm("Are you sure you want to replace the number?")) {
+      axios.put(`http://localhost:3001/persons/${personId}`, {number: newNumber}).then(response => console.log(response.data))
+    }
   } 
 } else {
 let newPerson = {name: newName, number: newNumber} 
@@ -66,7 +73,6 @@ const deleteItem = (index) => {
 const preventReset = (event) => {
   event.preventDefault()
 }
-console.log(persons)
   return (
     <div>
       <h2>Phonebook</h2>
