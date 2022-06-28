@@ -26,10 +26,16 @@ const handleSearchChange = (event) => {
 }
 
 const onClick = () => {
-let phoneBool = false 
+let phoneBool = false
+let inBook = false
 persons.find(person => person.name == newName ? phoneBool = true : phoneBool = false)
 if (phoneBool) {
-  window.alert(`${newName} is already in the phonebook`)
+  persons.find(person => person.number == newNumber ? inBook = true : inBook = false)
+  if (inBook) {
+    window.alert(`${newName} is already in the phonebook`)
+  } else {
+
+  } 
 } else {
 let newPerson = {name: newName, number: newNumber} 
 // setPersons((prevPersons) => ([...prevPersons, {name: `${newName}`, number: `${newNumber}`}])) Previous for setting state
@@ -49,17 +55,18 @@ console.log(persons)
 // }
 
 const deleteItem = (index) => {
-  axios.delete(`http://localhost:3001/persons/${index+1}`).then(response => {
-    console.log(response.data)
-    setPersons((previousPersons) => [...previousPersons, response.data])
-console.log(persons)
+  axios.delete(`http://localhost:3001/persons/` + index).then( () => {
+    return  axios.get('http://localhost:3001/persons')  }
+  ).then(response => {
+    setPersons(response.data)
   })
+
 }
 
 const preventReset = (event) => {
   event.preventDefault()
 }
-
+console.log(persons)
   return (
     <div>
       <h2>Phonebook</h2>
@@ -77,7 +84,7 @@ const preventReset = (event) => {
         
       </form>
       <h2>Numbers</h2>
-      {persons.map((personElements, id)=><p>{personElements.name}, {personElements.number}<button onClick={() => deleteItem(id)}>delete</button></p>)}
+      {persons.map((personElements, id)=><p>{personElements.name}, {personElements.number}<button onClick={() => deleteItem(personElements.id)}>delete</button></p>)}
     </div>
   )
 }
