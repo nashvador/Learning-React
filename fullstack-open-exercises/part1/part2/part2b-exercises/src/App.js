@@ -29,26 +29,25 @@ const onClick = () => {
 let phoneBool = false
 let inBook = false
 let personId = null
-persons.find((person) => {
-  if (person.name == newName) {
-    phoneBool = true;
-    personId = person.id
-  } else phoneBool = false})
+persons.find(person => person.name == newName ? phoneBool = true : phoneBool = false)
+persons.find(person => person.name == newName ? personId = person.id : personId = null)
 if (phoneBool) {
   persons.find(person => person.number == newNumber ? inBook = true : inBook = false)
   if (inBook) {
     window.alert(`${newName} is already in the phonebook`)
   } else {
-    if (Window.confirm("Are you sure you want to replace the number?")) {
-      axios.put(`http://localhost:3001/persons/${personId}`, {number: newNumber}).then(response => console.log(response.data))
+    if (window.confirm("Are you sure you want to replace the number?")) {
+      axios.put(`http://localhost:3001/persons/${personId}`, {name: newName, number: newNumber}).then( () => {
+        return axios.get('http://localhost:3001/persons')
+      }).then(response => setPersons(response.data))
+      
     }
-  } 
-} else {
+    }
+  } else {
 let newPerson = {name: newName, number: newNumber} 
 // setPersons((prevPersons) => ([...prevPersons, {name: `${newName}`, number: `${newNumber}`}])) Previous for setting state
 axios.post(`http://localhost:3001/persons`, newPerson).then(response => {console.log(response.data);
 setPersons((previousPersons) => [...previousPersons, response.data])}) 
-console.log(persons)
 }}
 
 // Delete without updating the state
