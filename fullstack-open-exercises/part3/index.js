@@ -29,7 +29,9 @@ app.get('/api/persons', (req, res) => {
 })
 
 app.get('/info', (req,res) => {
-    res.send(`There are ${persons.length} people in the phonebook`)
+    const date = new Date();
+    res.send(`There are ${persons.length} people in the phonebook \n
+    ${date}`)
 })
 
 const PORT = 3001
