@@ -1,7 +1,11 @@
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
 
 app.use(express.json())
+morgan.token('body', (req, res) => JSON.stringify(req.body));
+app.use(morgan(':method :url :status :response-time :res[content-length] - ms :body' ))
+
 
 let persons = [
     { 
@@ -57,9 +61,12 @@ app.delete('/api/persons/:id', (req, res) => {
 
 //   Why are we making a request method
 
+
+
 app.post('/api/persons', (req, res) => {
     const body = req.body
     let name_bool = false
+
 
     if (!body.name || !body.number) {
         return res.status(400).json({ 
