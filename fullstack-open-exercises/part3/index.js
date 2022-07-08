@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+app.use(express.json())
+
 let persons = [
     { 
       "id": 1,
@@ -45,6 +47,45 @@ app.delete('/api/persons/:id', (req, res) => {
     person = persons.filter(person => person.id !== id)
     res.status(204).end()
   })
+
+  const generateId = () => {
+    const maxId = persons.length > 0
+      ? Math.max(...persons.map(n => n.id))
+      : 0
+    return maxId + 1
+  }
+
+//   Why are we making a request method
+
+app.post('/api/persons', (req, res) => {
+    const body = req.body
+    let name_bool = false
+
+    if (!body.name || !body.number) {
+        return res.status(400).json({ 
+          error: 'content missing' 
+        })
+      }
+
+    persons.filter(person => person.name == body.name ? name_bool = true : name_bool = false)
+    
+    if (name_bool) {
+        return res.status(400).json({ 
+            error: 'Name is already in phonebook' 
+          })
+    }
+    
+
+    const person = {
+         id: generateId(),
+        name : body.name,
+        number : body.number,
+
+    }
+
+    persons = persons.concat(person)
+    res.json(body)
+})
 
 const PORT = 3001
 
