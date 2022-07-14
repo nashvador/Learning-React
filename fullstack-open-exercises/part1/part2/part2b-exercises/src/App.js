@@ -6,7 +6,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
-  const baseURL = `http://localhost:3001/api/persons` 
+  const baseURL = `/api/persons` 
 
 useEffect(()=> {
   axios.get(baseURL).then(response => {
@@ -38,8 +38,8 @@ if (phoneBool) {
     window.alert(`${newName} is already in the phonebook`)
   } else {
     if (window.confirm("Are you sure you want to replace the number?")) {
-      axios.put(`http://localhost:3001/api/persons/${personId}`, {name: newName, number: newNumber}).then( () => {
-        return axios.get(`http://localhost:3001/api/persons`)
+      axios.put(`${baseURL}/${personId}`, {name: newName, number: newNumber}).then( () => {
+        return axios.get(baseURL)
       }).then(response => setPersons(response.data))
       
     }
@@ -48,7 +48,7 @@ if (phoneBool) {
 let newPerson = {name: newName, number: newNumber} 
 // setPersons((prevPersons) => ([...prevPersons, {name: `${newName}`, number: `${newNumber}`}])) Previous for setting state
 axios.post(baseURL, newPerson).then(response => {console.log(response.data);
-setPersons((previousPersons) => [...previousPersons, response.data])}) 
+setPersons((previousPersons) => [...previousPersons, response.data])}).catch(error => console.log(error.data)) 
 }}
 
 // Delete without updating the state
@@ -62,7 +62,7 @@ setPersons((previousPersons) => [...previousPersons, response.data])})
 // }
 
 const deleteItem = (index) => {
-  axios.delete(baseURL + index).then( () => {
+  axios.delete(baseURL + "/" + index).then( () => {
     return  axios.get(baseURL)  }
   ).then(response => {
     setPersons(response.data)
