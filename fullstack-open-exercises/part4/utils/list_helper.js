@@ -25,4 +25,24 @@ const mostBlogs = (blogs) => {
   return { author: authorName, NumberofBlogs: max };
 };
 
-module.exports = { totalLikes, favoriteLikes, mostBlogs };
+const mostLikes = (blogs) => {
+  const filteredBlogsByLikes = blogs.map((value) => {
+    return value.likes;
+  });
+  const max = Math.max.apply(null, filteredBlogsByLikes);
+  const authorName = blogs[filteredBlogsByLikes.indexOf(max)].author;
+  const filteredBlogsByAuthor = blogs.filter((eachBlog) => {
+    return eachBlog.author == authorName;
+  });
+  const totalLikes = filteredBlogsByAuthor
+    .map((eachBlog) => {
+      return eachBlog.likes;
+    })
+    .reduce((previous, current) => previous + current, 0);
+  return {
+    author: authorName,
+    likes: totalLikes,
+  };
+};
+
+module.exports = { totalLikes, favoriteLikes, mostBlogs, mostLikes };
