@@ -45,14 +45,14 @@ blogsRouter.post("/", async (request, response, next) => {
 });
 
 blogsRouter.delete("/:id", async (request, response, next) => {
-  // check if token id matches the user id?
-
   const decodedToken = jwt.verify(request.token, process.env.SECRET);
   if (!decodedToken.id) {
     return response.status(401).json({ error: "token missing or invalid" });
   }
   const blog = await Blog.findById(request.params.id);
-  if (blog.user.toString() === decodedToken.id.toString()) {
+  const foundUser = await User.findById(decodedToken.id);
+  console.log(blog);
+  if (blog.user.toString() === foundUser._id.toString()) {
     await Blog.findByIdAndRemove(request.params.id);
     response.status(204).end();
   } else {
