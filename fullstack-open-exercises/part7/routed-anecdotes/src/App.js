@@ -99,6 +99,7 @@ const CreateNew = ({ addNew }) => {
   const author = useField("text");
   const info = useField("text");
 
+  console.log(useField("text"));
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
@@ -110,6 +111,12 @@ const CreateNew = ({ addNew }) => {
       votes: 0,
     });
     navigate("/");
+  };
+
+  const handleClick = (event) => {
+    content.reset(event);
+    author.reset(event);
+    info.reset(event);
   };
 
   return (
@@ -129,6 +136,13 @@ const CreateNew = ({ addNew }) => {
           <input {...info} />
         </div>
         <button>create</button>
+        <button
+          onClick={(event) => {
+            handleClick(event);
+          }}
+        >
+          reset
+        </button>
       </form>
     </div>
   );
