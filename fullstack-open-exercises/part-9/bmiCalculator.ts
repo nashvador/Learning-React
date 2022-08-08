@@ -26,6 +26,7 @@ const bmiCalc = (height: number, weight: number): string => {
   } else if (bmi > 25) {
     return "too unhealthy";
   }
+  return "something went wrong";
 };
 
 try {
@@ -38,3 +39,5 @@ try {
   }
   console.log(errorMessage);
 }
+
+export default bmiCalc;
