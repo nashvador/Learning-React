@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import Blog from "./components/Blog";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
+import NewBlogForm from "./components/NewBlogForm";
 
 const LoginForm = ({
   handleLogin,
@@ -34,8 +35,6 @@ const LoginForm = ({
 );
 
 const BlogForm = ({ onLogOut, blogs, user }) => {
-  // useeffect and setState
-
   const filteredBlogs = blogs.filter(
     (eachBlog) => eachBlog.user.name == user.name
   );
@@ -55,58 +54,6 @@ const BlogForm = ({ onLogOut, blogs, user }) => {
   );
 };
 
-const NewBlogForm = ({
-  handleAddBlog,
-  setTitle,
-  setAuthor,
-  setUrl,
-  setLikes,
-  title,
-  author,
-  url,
-  likes,
-}) => (
-  <form onSubmit={handleAddBlog}>
-    <div>
-      Title
-      <input
-        type="text"
-        value={title}
-        name="title"
-        onChange={({ target }) => setTitle(target.value)}
-      />
-    </div>
-    <div>
-      Author
-      <input
-        type="text"
-        value={author}
-        name="author"
-        onChange={({ target }) => setAuthor(target.value)}
-      />
-    </div>
-    <div>
-      Url
-      <input
-        type="text"
-        value={url}
-        name="url"
-        onChange={({ target }) => setUrl(target.value)}
-      />
-    </div>
-    <div>
-      Likes
-      <input
-        type="number"
-        value={likes}
-        name="likes"
-        onChange={({ target }) => setLikes(target.value)}
-      />
-    </div>
-    <button type="submit">Create Post</button>
-  </form>
-);
-
 const App = () => {
   const [blogs, setBlogs] = useState([]);
   const [username, setUsername] = useState("");
@@ -117,6 +64,7 @@ const App = () => {
   const [author, setAuthor] = useState("");
   const [url, setUrl] = useState("");
   const [likes, setLikes] = useState("");
+  const [blogVisible, setBlogVisible] = useState(false);
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -166,6 +114,7 @@ const App = () => {
       setAuthor("");
       setUrl("");
       setLikes(0);
+      setBlogVisible(false);
       console.log("got");
     } catch {
       setErrorMessage("Blog Post Failed");
@@ -203,6 +152,8 @@ const App = () => {
           author={author}
           url={url}
           likes={likes}
+          blogVisible={blogVisible}
+          setBlogVisible={setBlogVisible}
         />
       )}
       <h2>blogs</h2>
