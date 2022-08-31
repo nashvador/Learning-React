@@ -38,8 +38,6 @@ const BlogForm = ({ onLogOut, blogs, user }) => {
   const filteredBlogs = blogs.filter(
     (eachBlog) => eachBlog.user.name == user.name
   );
-  console.log(filteredBlogs);
-  console.log(blogs);
 
   return (
     <div>
@@ -121,6 +119,7 @@ const App = () => {
     }
   };
 
+  console.log(blogs);
   const onLogOut = () => {
     window.localStorage.removeItem("loggedBlogappUser");
     setUser(null);
@@ -158,7 +157,7 @@ const App = () => {
       )}
       <h2>blogs</h2>
       {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} setBlogs={setBlogs} />
       ))}
     </div>
   );
