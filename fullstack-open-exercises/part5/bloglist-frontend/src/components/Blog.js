@@ -12,9 +12,10 @@ const Blog = ({ blog, setBlogs, blogs }) => {
   };
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className="blog">
       <div>
-        {blog.title} {blog.author}
+        <div className="title">{blog.title} </div>{" "}
+        <div className="author">{blog.author} </div>
         <button onClick={() => setShowBlog((oldstate) => !oldstate)}>
           {showBlog ? "hide" : "show"}
         </button>
