@@ -1,7 +1,7 @@
 import { useState } from "react";
 import blogService from "../services/blogs";
 
-const Blog = ({ blog, setBlogs }) => {
+const Blog = ({ blog, setBlogs, blogs }) => {
   const [showBlog, setShowBlog] = useState(false);
   const blogStyle = {
     paddingTop: 10,
@@ -40,6 +40,19 @@ const Blog = ({ blog, setBlogs }) => {
             </button>
           </div>
           {blog.user.name}
+          <button
+            onClick={() =>
+              blogService
+                .deleteBlog(blog.id)
+                .then(
+                  setBlogs(
+                    blogs.filter((eachEmployee) => eachEmployee.id !== blog.id)
+                  )
+                )
+            }
+          >
+            remove
+          </button>
         </div>
       </div>
     </div>
