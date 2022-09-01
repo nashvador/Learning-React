@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import Blog from "./components/Blog";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
@@ -36,7 +36,7 @@ const LoginForm = ({
 
 const BlogForm = ({ onLogOut, blogs, user }) => {
   const filteredBlogs = blogs.filter(
-    (eachBlog) => eachBlog.user.name == user.name
+    (eachBlog) => eachBlog.user.name === user.name
   );
 
   return (
@@ -97,6 +97,7 @@ const App = () => {
       }, 5000);
     }
   };
+  console.log(errorMessage);
 
   const handleAddBlog = async (event) => {
     event.preventDefault();
