@@ -19,7 +19,10 @@ const Blog = ({ blog, setBlogs, blogs }) => {
         <button onClick={() => setShowBlog((oldstate) => !oldstate)}>
           {showBlog ? "hide" : "show"}
         </button>
-        <div style={showBlog ? { display: "" } : { display: "none" }}>
+        <div
+          style={showBlog ? { display: "" } : { display: "none" }}
+          className="togglableContent"
+        >
           <div>{blog.url}</div>
           <div>
             {blog.likes}{" "}
