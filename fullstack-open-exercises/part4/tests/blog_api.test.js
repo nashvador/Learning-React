@@ -28,3 +28,9 @@ test("all blogs are returned", async () => {
 
   expect(response.body).toHaveLength(helper.initialBlogs.length);
 });
+
+test("blogs contain Id", async () => {
+  const response = await api.get("/api/blogs");
+
+  expect(response.body[0].id).toBeDefined();
+});
