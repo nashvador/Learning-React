@@ -2,7 +2,6 @@ require("dotenv").config();
 const { Sequelize, Model, DataTypes } = require("sequelize");
 const express = require("express");
 const app = express();
-app.use(express.json());
 
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialectOptions: {
@@ -47,20 +46,6 @@ Blog.init(
 app.get("/api/blogs", async (req, res) => {
   const notes = await Blog.findAll();
   res.json(notes);
-});
-
-app.post("/api/blogs", async (req, res) => {
-  try {
-    const blog = await Blog.create(req.body);
-    return res.json(blog);
-  } catch (error) {
-    return res.status(400).json({ error });
-  }
-});
-
-app.delete("/api/blogs/:id", async (req, res) => {
-  await Blog.destroy({ where: { id: req.params.id } });
-  res.status(204).end();
 });
 
 const PORT = process.env.PORT || 3001;
