@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const middleware = require("./utils/middleware");
+const middleware = require("./util/middleware");
 
 const { PORT } = require("./util/config");
 const { connectToDatabase } = require("./util/db");
