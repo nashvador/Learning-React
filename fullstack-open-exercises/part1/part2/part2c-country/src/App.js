@@ -29,22 +29,14 @@ return(
 function App() {
 const [countryData, setCountryData] = useState([])
 const [countrySearch, setCountrySearch] = useState('')
-
+const onCountrySearch = (event) => {
+  setCountrySearch(event.target.value)
+}
+let filteredData = countryData.filter((newData) => newData.name.common.toLowerCase().includes(countrySearch.toLowerCase()))
 
 useEffect(()=> {
 axios.get('https://restcountries.com/v3.1/all').then(response => setCountryData(response.data))
 }, [])
-
-const onCountrySearch = (event) => {
-  setCountrySearch(event.target.value)
-}
-
-
-
-
-
-
-let filteredData = countryData.filter((newData) => newData.name.common.toLowerCase().includes(countrySearch.toLowerCase()))
 
 const filterCountryData = () => {
 if (filteredData.length > 10) {
@@ -63,10 +55,8 @@ if (filteredData.length > 10) {
     <ul>{(Object.values(singleCountryData.languages)).map(language => <li>{language}</li>)}</ul>
     <img src={singleCountryData.flags.png}></img>
   </div>)
-
 }
 }
-
   return (
     <div>
       find countries <input value={countrySearch} onChange={onCountrySearch}></input>
