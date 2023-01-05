@@ -6,12 +6,13 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newSearch, setNewSearch] = useState('')
+  const baseURL = `/api/persons` 
 
 useEffect(()=> {
-  axios.get('http://localhost:3001/persons').then(response => {
+  axios.get(baseURL).then(response => {
     setPersons(response.data)
   })
-}, [] ) 
+}, []) 
 
 const handleNameChange = (event) => {
   setNewName(event.target.value)
@@ -27,16 +28,51 @@ const handleSearchChange = (event) => {
 
 const onClick = () => {
 let phoneBool = false
+let inBook = false
+let personId = null
 persons.find(person => person.name == newName ? phoneBool = true : phoneBool = false)
+persons.find(person => person.name == newName ? personId = person.id : personId = null)
 if (phoneBool) {
-  window.alert(`${newName} is already in the phonebook`)
-} else setPersons((prevPersons) => ([...prevPersons, {name: `${newName}`, number: `${newNumber}`}])) 
+  persons.find(person => person.number == newNumber ? inBook = true : inBook = false)
+  if (inBook) {
+    window.alert(`${newName} is already in the phonebook`)
+  } else {
+    if (window.confirm("Are you sure you want to replace the number?")) {
+      axios.put(`${baseURL}/${personId}`, {name: newName, number: newNumber}).then( () => {
+        return axios.get(baseURL)
+      }).then(response => setPersons(response.data))
+      
+    }
+    }
+  } else {
+let newPerson = {name: newName, number: newNumber} 
+// setPersons((prevPersons) => ([...prevPersons, {name: `${newName}`, number: `${newNumber}`}])) Previous for setting state
+axios.post(baseURL, newPerson).then(response => {console.log(response.data);
+setPersons((previousPersons) => [...previousPersons, response.data])}).catch(error => console.log(error.data)) 
+}}
+
+// Delete without updating the state
+// const deleteItem = (index) => {
+//   setPersons((prevState) => {
+//     let items = [...prevState];
+//     console.log(items);
+//     items.splice(index, 1);
+//     return items;
+//   });
+// }
+
+const deleteItem = (index) => {
+  axios.delete(baseURL + "/" + index).then( () => {
+    return  axios.get(baseURL)  }
+  ).then(response => {
+    setPersons(response.data)
+  })
+
 }
 
 const preventReset = (event) => {
   event.preventDefault()
 }
-
   return (
     <div>
       <h2>Phonebook</h2>
@@ -54,7 +90,7 @@ const preventReset = (event) => {
         
       </form>
       <h2>Numbers</h2>
-      {persons.map((personElements)=><p>{personElements.name}, {personElements.number}</p>)}
+      {persons.map((personElements, id)=><p>{personElements.name}, {personElements.number}<button onClick={() => deleteItem(personElements.id)}>delete</button></p>)}
     </div>
   )
 }
