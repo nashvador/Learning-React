@@ -7,3 +7,4 @@ services:
       volumes:
         - ./text.log:/usr/src/app/text.log
       container_name: devops
+      command: bash -c "server"
